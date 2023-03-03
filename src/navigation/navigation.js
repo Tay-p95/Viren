@@ -14,7 +14,7 @@ export default function Navigation() {
       <Router basename="/" >
           <Routes>
               <Route path="/" element={<FetchPage />}></Route>
-              <Route path="/notepage" element={<NotePage />}></Route>
+              <Route path="/notepage/:id" element={<NotePage />}></Route>
           </Routes>
 
       </Router>

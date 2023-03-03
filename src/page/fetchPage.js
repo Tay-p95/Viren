@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate} from "react-router-dom";
 import { StyleSheet } from '../configuration/style';
+import Header from '../component/header';
 
 
 
@@ -12,7 +13,8 @@ export default function FetchPage() {
     const [id, setID] = useState(null);
     return (
         <div style={{ width: '100%', height: '100%' }}>
-            <div style={{ align: 'center', justifyContent: 'center', marginTop: "20%",  }}>
+          
+            <div style={{ align: 'center', justifyContent: 'center', marginTop: "15%",  }}>
                 <Box
                     component="form"
                     sx={{
