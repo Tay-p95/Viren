@@ -4,11 +4,24 @@ from discord.ext.audiorec import NativeVoiceClient  # important!
 from secrets import token  # bot's secret token
 import random
 import requests
+import string
 
 intents = discord.Intents().all()
 client = commands.Bot(command_prefix="!", intents=intents)
 client.remove_command('help')
 
+
+async def sendAudio(audio, id):
+    try:
+        await requests.post("")
+    except:
+        print("Error sending audio", file={
+            id : audio
+        })
+
+
+def generateToken():
+    return random.choices(string.ascii_lowercase, k = 10 )
 
 @client.event
 async def on_ready():
@@ -49,13 +62,15 @@ async def stop(ctx: commands.Context):
     if not ctx.voice_client.is_recording():
         return
     await ctx.send(f'Stopping the Recording')
-
     wav_bytes = await ctx.voice_client.stop_record()
-
     name = str(random.randint(000000, 999999))
-    with open(f'{name}.wav', 'wb') as f:
-        f.write(wav_bytes)
+    id = generateToken()
+    # with open(f'{name}.wav', 'wb') as f:
+    #     f.write(wav_bytes)
+
+    await sendAudio(wav_bytes, id)
     await ctx.voice_client.disconnect()
+   
 
 
 @rec.before_invoke
@@ -70,11 +85,7 @@ async def ensure_voice(ctx):
     elif ctx.voice_client.is_playing():
         ctx.voice_client.stop()
 
-async def sendAudio(audio):
-    try:
-        await requests.post("")
-    except:
-        print("Error sending audio")
+
     
 
 client.run(token)
