@@ -1,34 +1,34 @@
 import { React, useState, useEffect } from 'react';
 import { getRecord } from '../util/noteUtil';
+import { Grid } from '@mui/material';
+import Dialog from '../component/Dialog';
+import Graph from '../component/Graph';
 import { useLocation } from 'react-router-dom';
+import responses from "../mockResponses.json"
 import Header from '../component/header';
-import CustomMindMap from '../component/mindMap';
 
 export default function NotePage() {
     const location = useLocation();
-    const [data, setData] = useState(null);
+    const [data, setData] = useState(responses);
 
 
-    useEffect(() => {
-        getData(location.state.id);
-    }, []);
+    // useEffect(() => {
+    //     getData(location.state.id);
+    // }, []);
 
-    const getData = async () => {
-        const result = await getRecord();
-        setData(result);
-    };
+    // const getData = async () => {
+    //     const result = await getRecord();
+    //     setData(result);
+    // };
 
     return (
         <div>
             <Header />
             {data ?
-                <div>
-                    <h1>{data.title}</h1>
-                    <div style ={{ display: 'flex', flexDirection:" column", justifyContent: 'space-between'}}>
-                        <div> </div>
-                        <CustomMindMap/>
-                    </div>
-                </div> :
+                 <Grid container spacing={2}>
+                 <Dialog responses={data} />
+                 <Graph responses={data} />
+             </Grid> :
                 <div />}
         </div>
     );
