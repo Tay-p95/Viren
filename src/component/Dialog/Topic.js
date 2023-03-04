@@ -1,7 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useMemo } from "react";
 
-const Topic = ({ mainTheme, relatedTopics, setSelectedID }) => {
+const Topic = ({ mainTheme, relatedTopics, selectedID, setSelectedID }) => {
+  const isActive = useMemo(() => selectedID === mainTheme.id, [selectedID]);
   const themeOnClick = (id) => {
     setSelectedID(id);
   };
@@ -15,7 +16,12 @@ const Topic = ({ mainTheme, relatedTopics, setSelectedID }) => {
         onClick={() => themeOnClick(mainTheme.id)}
         variant="h6"
         fontWeight={600}
-        sx={{ textDecoration: "underline", cursor: "pointer" }}
+        color={isActive ? "#bebebe" : "text.primary"}
+        sx={{
+          textDecoration: "underline",
+          cursor: "pointer",
+          ":hover": { color: "#bebebe" },
+        }}
       >
         {mainTheme.label}
       </Typography>

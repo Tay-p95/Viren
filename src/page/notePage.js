@@ -27,7 +27,11 @@ export default function NotePage() {
       <Header />
       {data ? (
         <Grid container spacing={2}>
-          <Dialog responses={data} setSelectedID={setSelectedID} />
+          <Dialog
+            responses={data}
+            setSelectedID={setSelectedID}
+            selectedID={selectedID}
+          />
           <Graph responses={data} selectedID={selectedID} />
         </Grid>
       ) : (
